@@ -72,7 +72,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/users', UserController::class);
     Route::resource('/problem_lists', ProblemListController::class);
     Route::resource('/categories', CategoryController::class);
-    Route::get('comments', [CommentController::class, 'index']);
+    Route::get('comments', [CommentController::class, 'index'])->name('get.comments');
+
     Route::get('/problem_lists/{problem_list}/comments', [CommentController::class, 'show'])->name('problem_lists.comments.show');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('problem_list.comments.destroy');
     Route::get('/problem_list/{posts}/comment/create', [CommentController::class, 'create']);
