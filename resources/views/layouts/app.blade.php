@@ -49,6 +49,7 @@
 
 
 
+     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
      <!-- Fonts -->
      <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -88,7 +89,6 @@
      <link href="{{ asset('codemirror/theme/3024-night.css') }}" rel="stylesheet" />
      <script src="{{ asset('codemirror/lib/codemirror.js') }}"></script>
      <script src="{{ asset('codemirror/mode/xml/xml.js') }}"></script>
-
 
 
  </head>

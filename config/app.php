@@ -154,6 +154,9 @@ return [
     |
     */
 
+    'images_path' => base_path() . '/storage/admins/',
+
+
     'providers' => [
 
         /*
