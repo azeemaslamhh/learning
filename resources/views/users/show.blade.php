@@ -43,7 +43,11 @@
                                         <td>{{ $user?->id }}</td>
                                         <td>{{ $user?->name }}</td>
                                         <td>{{ $user?->email }}</td>
-                                        <td>{{ $user?->roles?->first()?->name }}</td>
+                                        @if($user->role)
+                                        <td>{{ $user->role->name}}</td>
+                                        @else
+                                        <td>No Role Assign</td>
+                                        @endif
 
                                         <td>
                                             <form action="{{ route('users.destroy',$user?->id) }}" method="POST">

@@ -26,37 +26,31 @@
 
 
      <!-- datatables -->
-
-
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
 
-     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-     <!-- <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}"> -->
-     <!-- <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script> -->
+     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script> -->
 
+     <!-- jquery in DataTables -->
+     <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
 
-     <!-- <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}"> -->
-     <!-- <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-     <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script> -->
-
-     <!--      
-
-     <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
-     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script> -->
+     <!-- DataTables -->
+     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 
 
 
-     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 
      <!-- Fonts -->
      <link rel="dns-prefetch" href="//fonts.gstatic.com">
      <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
      <!-- Scripts -->
-     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+     <!-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) -->
 
 
      <!-- Ekko Lightbox -->
@@ -111,7 +105,7 @@
      <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js') }}"></script>
 
      <!-- jQuery -->
-     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+     
      <!-- jQuery UI 1.11.4 -->
      <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
      <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -120,13 +114,17 @@
      </script>
      <!-- Bootstrap 4 -->
      <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    
+
+
+
      <!-- ChartJS -->
      <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
      <!-- Sparkline -->
      <script src="{{ asset('plugins/sparklines/sparkline.js') }}"></script>
-     <!-- JQVMap -->
+     <!-- JQVMap
      <script src="{{ asset('plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-     <script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
+     <script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script> -->
      <!-- jQuery Knob Chart -->
      <script src="{{ asset('plugins/jquery-knob/jquery.knob.min.js') }}"></script>
      <!-- daterangepicker -->
@@ -144,7 +142,7 @@
      <!-- AdminLTE for demo purposes -->
      <!-- <script src="{{ asset('dist/js/demo.js') }}"></script> -->
      <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-     <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
+      <!-- <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script> -->
 
 
      <script src="{{ asset('dist/js/repeater.js') }}"></script>
@@ -159,5 +157,33 @@
      <script>
          hljs.highlightAll();
      </script>
+     
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script>
+    var objTable;
+    var objRow;
+    $(document).ready(function () {
+        objTable = $('#example1').dataTable({
+            "aoColumnDefs": [{"bSortable": false, "aTargets": []}],
+            "bProcessing": true,
+            "bServerSide": true,
+            "aaSorting": [[0, "DESC"]],
+            "sPaginationType": "full_numbers",
+            "sAjaxSource": "{{ route('get.users') }}",
+            language: {
+            },
+            "fnServerParams": function (aoData) {                
+                
+            },
+            "aLengthMenu": [[20, 50, 100, 500], [20, 50, 100, 500]]
+        });
+    });
 
+</script>
  </html>

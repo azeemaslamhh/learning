@@ -64,9 +64,16 @@ Route::get('/home', [HomeController::class, 'index'])
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
+    Route::get('/getCustomFields', [UserController::class, 'index'])->name('getCustomFields');
+    
     Route::get('problem_lists/search', [ProblemListController::class, 'search_list']);
     Route::get('problem_lists/filter', [ProblemListController::class, 'filter_list']);
-    Route::get('users/search', [UserController::class, 'search_list']);
+    Route::get('get-users', [UserController::class, 'getUsers'])->name('get.users');
+
+    Route::get('users/{user}/change_password', [UserController::class, 'change_password'])->name('users.change_password');
+    Route::put('users/password-update', [UserController::class, 'update_change_password'])->name('users.update_change_password');
+
+
     Route::get('users/filter', [UserController::class, 'filter_list']);
     Route::get('/search', [HomeController::class, 'search_list']);
     Route::resource('/users', UserController::class);
