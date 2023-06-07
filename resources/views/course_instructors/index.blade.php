@@ -48,7 +48,8 @@
 
 
                                                         <a class="brand-link text-black">
-                                                            <img src="{{ asset( $course_instructor?->image) }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                                                            <img src="{{ asset('storage/admins/images/' . $course_instructor->image) }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+
                                                             <span class="brand-text font-weight-dark">{{ $course_instructor?->name }}</span>
                                                         </a>
                                                         <!-- {{ $course_instructor?->name }} -->

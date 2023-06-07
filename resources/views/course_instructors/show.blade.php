@@ -42,7 +42,14 @@
                                     <tr>
                                         <td>{{ $courseInstructor?->id }}</td>
                                         <td>
-                                            <img src="{{ asset( $courseInstructor?->image) }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+                                                    <!-- <div class="col-7 text-bold"> -->
+                                                        <a class="brand-link text-black">
+                                                            <img src="{{ asset('storage/admins/images/' . $courseInstructor->image) }}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
+                                                        </a>
+
+                                                    <!-- </div> -->
+
+                                            
                                         </td>
                                         <td style=" vertical-align: middle;">
                                             <span class=" brand-text"> <strong>{{ $courseInstructor?->name }}</strong></span>

@@ -162,7 +162,6 @@ class BlogPostController extends Controller
 
     public function show(BlogPost $blogPost)
     {
-
         $blogPost = BlogPost::find($blogPost->id);
         return view('blog_posts.show', compact('blogPost'));
     }

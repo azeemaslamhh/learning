@@ -169,7 +169,7 @@
 
 
                 <!-- Course -->
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-server text-white" aria-hidden="true"></i>
 
@@ -209,11 +209,17 @@
                         <li class="nav-item">
                             <a href="{{ route('course_instructors.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-tag text-danger"></i>
-                                <p class="text-white">Course Instructor</p>
+                                <p class="text-white">Course Instructors</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('course_videos.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-tag text-danger"></i>
+                                <p class="text-white">Course Videos</p>
                             </a>
                         </li>
                     </ul>
-                </li> -->
+                </li>
 
                 <!-- Classified -->
                 <!-- <li class="nav-item">

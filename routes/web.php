@@ -9,6 +9,7 @@ use App\Http\Controllers\CourseCategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseInstructorController;
 use App\Http\Controllers\CourseTagController;
+use App\Http\Controllers\CourseVideoController;
 use App\Http\Controllers\ProblemListController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\PostTypeController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\QuizOptionController;
 use App\Http\Controllers\QuizQuestionController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,11 +63,12 @@ Route::get('/home', [HomeController::class, 'index'])
     ->middleware('auth', 'role:admin');
 
 
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
     Route::get('/getCustomFields', [UserController::class, 'index'])->name('getCustomFields');
-    
+
     Route::get('problem_lists/search', [ProblemListController::class, 'search_list']);
     Route::get('problem_lists/filter', [ProblemListController::class, 'filter_list']);
     Route::get('get-users', [UserController::class, 'getUsers'])->name('get.users');
@@ -95,23 +98,26 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/course_categories', CourseCategoryController::class);
     Route::resource('/course_tags', CourseTagController::class);
     Route::resource('/course_instructors', CourseInstructorController::class);
+    Route::resource('/course_videos', CourseVideoController::class);
     Route::resource('/quizzes', QuizController::class);
     Route::resource('/input_field_types', InputFieldTypeController::class);
-
-
     // Route::get('/quizzes/{quiz}/quiz_questions', [QuizQuestionController::class, 'show'])->name('quizzes.quiz_questions.show');
     // Route::get('/quizzes/{quiz}/quiz_questions/create', [QuizQuestionController::class, 'create']);
     // Route::get('/quizzes/{quiz}/quiz_questions/store', [QuizQuestionController::class, 'store'])->name('quizzes.quiz_questions.store');
     // Route::delete('/quiz_questions/{quiz_question}', [QuizQuestionController::class, 'destroy'])->name('quizzes.quiz_questions.destroy');
-
     // Route::resource('/quiz_questions', QuizQuestionController::class);
     Route::resource('/quiz_options', QuizOptionController::class);
     Route::get('/get-quezes', [QuizController::class, 'getQuises'])->name('get.quizes');
 
-
     // codemirror
     Route::get('/code_mirrors', [HomeController::class, 'code_mirrors']);
 
+    Route::get('videos/{filename}', [VideoController::class, 'show'])->name('videos.show');
+
+    // Route::get('videos/{filename}', [VideoController::class, 'show'])->middleware('video.restriction')->name('videos.show');
 
     Route::post('/run_script', [HomeController::class, 'run_script'])->name("run_script");
 });
+
+
+

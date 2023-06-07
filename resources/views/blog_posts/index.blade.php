@@ -25,15 +25,6 @@
     </section>
     <section class="content">
         <div class="container-fluid">
-
-
-
-
-
-
-
-
-
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -47,13 +38,15 @@
                                 <div class="row">
 
                                     @foreach ($blog_posts as $blog_post)
-    
+
                                     <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
                                         <div class="card bg-light d-flex flex-fill">
                                             <div class="card-header text-muted border-bottom-0">
                                             </div>
                                             <div class="card-body pt-0">
-                                            <img src="storage/admins/images/{{  $blog_post?->image }}" alt="Image" class="img-thumbnail" style="height: 300px; width:100% cover:fit-content; ">
+
+
+                                                <img src="{{ asset('storage/admins/images/' . $blog_post->image) }}" alt="Image" class="img-thumbnail" style="height: 300px; width: 100%; object-fit: cover;">
                                                 <div class="card-body">
                                                     <h5 class="card-title text-bold">{{ $blog_post?->title }}</h5>
                                                     <br />

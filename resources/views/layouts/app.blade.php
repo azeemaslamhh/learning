@@ -186,4 +186,52 @@
     });
 
 </script>
+<script>
+      
+		
+		$(document).ready(function() {
+
+			var video = document.getElementById("my-video");
+			var menu = $(".custom-menu");
+			// Show the custom menu on right-click
+			$(document).on("contextmenu", ".video-container", function(e) {
+				e.preventDefault();
+                console.log('pause');
+
+				menu.css({
+					display: "block",
+					left: e.pageX,
+					top: e.pageY
+				});
+			});
+
+			// Hide the custom menu when clicked outside
+			$(document).on("click", function() {
+				menu.hide();
+			});
+
+			// Handle menu item click events
+			$(document).on("click", ".menu-item", function() {
+				var action = $(this).data("action");
+                console.log("menu ",action);
+				switch (action) {
+					case "play":
+						video.play();
+						break;
+					case "pause":
+						video.pause();
+						break;
+					case "mute":
+						video.muted = true;
+						break;
+					case "unmute":
+						video.muted = false;
+						break;
+				}
+
+				menu.hide();
+			});
+		});
+
+	</script>
  </html>

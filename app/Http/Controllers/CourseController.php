@@ -49,7 +49,7 @@ class CourseController extends Controller
             'title' => 'required',
             // 'description' => 'required',
             // 'price' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5000',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5000',
         ]);
         $image = $request->image;
         $image_name = $image->getClientOriginalName();
