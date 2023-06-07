@@ -33,7 +33,7 @@
                                 <h3 class="card-title">Edit Course Instructor</h3>
                             </div>
 
-                            <form action="{{ route('course_instructors.update',$courseInstructor?->id) }}" method="POST">
+                            <form action="{{ route('course_instructors.update',$courseInstructor?->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row mb-3">
@@ -50,7 +50,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="row mb-3">
                                     <label for="detail" class="col-md-4 col-form-label text-md-end">{{ __('Details') }}</label>
 
@@ -64,7 +63,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
 
 
                                 <div class="row mb-3">
@@ -97,14 +95,14 @@
                                     </div>
                                 </div>
 
+
+
                                 <div class="row mb-3">
                                     <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Image') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ $courseInstructor?->image }}" autofocus>
-                                        @if($courseInstructor?->image)
-                                        <img src="{{ asset( $courseInstructor?->image) }}" alt="image" class="img-thumbnail">
-                                        @endif
+                                        <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ $courseInstructor?->image }}" required autofocus>
+
                                         @error('image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -113,11 +111,11 @@
                                     </div>
                                 </div>
 
+
                                 <div class="row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <a class="btn btn-success" href="{{ route('course_instructors.index') }}"> Back</a>
-
                                     </div>
                                 </div>
 
