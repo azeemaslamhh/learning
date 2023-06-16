@@ -8,13 +8,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Update Blog</h1>
+                        <h1>Update Course</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Blogs Table</a></li>
-                            <li class="breadcrumb-item active">Update Blog</li>
+                            <li class="breadcrumb-item"><a href="#">Course</a></li>
+                            <li class="breadcrumb-item active">Update Course</li>
                         </ol>
                     </div>
                 </div>
@@ -30,18 +30,23 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Edit Blog Information</h3>
+                                <h3 class="card-title">Edit Course</h3>
                             </div>
 
-                            <form action="{{ route('blog_posts.update',$blogPost?->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('courses.update',$course?->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
+
+
+                                    {{$course}}
+                                    {{$course->tags}}
+                                    {{$course->instructors}}
 
                                 <div class="row mb-3">
                                     <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Title') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $blogPost?->title }}" required autocomplete="title" autofocus>
+                                        <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" title="title" value="{{ $course?->title }}" required autocomplete="title" autofocus>
 
                                         @error('title')
                                         <span class="invalid-feedback" role="alert">
@@ -51,13 +56,15 @@
                                     </div>
                                 </div>
 
+
+
                                 <div class="row mb-3">
-                                    <label for="content" class="col-md-4 col-form-label text-md-end">{{ __('Content') }}</label>
+                                    <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Descriptions') }}</label>
 
                                     <div class="col-md-6">
-                                        <textarea id="content" type="text" class="form-control @error('content') is-invalid @enderror" name="content" value="{{ $blogPost?->content }}" required autocomplete="content" autofocus>{{ $blogPost?->content }}</textarea>
+                                        <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ $course?->description }}" required autocomplete="description" autofocus>
 
-                                        @error('content')
+                                        @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -65,14 +72,32 @@
                                     </div>
                                 </div>
 
+
+
+                                <div class="row mb-3">
+                                    <label for="price" class="col-md-4 col-form-label text-md-end">{{ __('price') }}</label>
+
+                                    <div class="col-md-6">
+
+                                        <input id="price" type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{$course?->price }}" required autocomplete="price" autofocus>
+
+
+                                        @error('price')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
+
                                 <div class="row mb-3">
                                     <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Image') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ $blogPost?->image }}" autofocus>
-                                        @if($blogPost?->image)
-                                        <img src="{{ asset( $blogPost?->image) }}" alt="image" class="img-thumbnail">
-                                        @endif
+                                        <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ $course?->image }}" required autofocus>
+
                                         @error('image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -81,38 +106,16 @@
                                     </div>
                                 </div>
 
-
-                                <div class="row mb-3">
-                                    <label for="images[]" class="col-md-4 col-form-label text-md-end">{{ __('Images') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input type="file" name="images[]" id="images" class="form-control @error('images') is-invalid @enderror" value="{{ $blogPost?->images }}" autofocus multiple>
-                                        @if($blogPost?->images)
-                                        @foreach ($blogPost?->images as $img)
-                                        <div class="col-sm-2">
-                                            <a href="{{ asset( $img?->image) }}" data-toggle="photos" data-title="{{ asset( $img?->image) }}" data-gallery="gallery">
-                                                <img src="{{ asset( $img?->image) }}" class="img-fluid mb-2" alt="white sample" />
-                                            </a>
-                                        </div>
-                                        @endforeach
-                                        @endif
-                                        @error('images')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
+                                
 
                                 <div class="row mb-3">
                                     <label class="col-md-4 col-form-label text-md-end">{{ __('Select Categories') }}</label>
                                     <div class="col-md-6">
-                                        @foreach ($blog_post_categories as $blog_post_category)
+                                        @foreach ($course_categories as $course_category)
                                         <div>
-                                            <input type="checkbox" id="{{ $blog_post_category->id }}" name="blog_post_categories[]" value="{{ $blog_post_category->id }}" @if(is_array(old('blog_post_categories')) && in_array($blog_post_category->id, old('blog_post_categories'))) checked @endif
-                                            @if($blogPost->categories->contains($blog_post_category->id)) checked @endif>
-                                            <label for="blog_post_category{{ $blog_post_category->id }}">{{ $blog_post_category->name }}</label>
+                                            <input type="checkbox" id="{{ $course_category->id }}" name="course_categories[]" value="{{ $course_category->id }}" @if(is_array(old('course_categories')) && in_array($course_category->id, old('course_categories'))) checked @endif
+                                            @if($course->categories->contains($course_category->id)) checked @endif>
+                                            <label for="course_category{{ $course_category->id }}">{{ $course_category->name }}</label>
                                         </div>
                                         @endforeach
                                     </div>
@@ -122,39 +125,48 @@
                                 <div class="row mb-3">
                                     <label class="col-md-4 col-form-label text-md-end">{{ __('Select Tags') }}</label>
                                     <div class="col-md-6">
-                                        @foreach ($blog_post_tags as $blog_post_tag)
+                                        @foreach ($course_tags as $course_tag)
                                         <div>
-                                            <input type="checkbox" id="{{ $blog_post_tag->id }}" name="blog_post_tags[]" value="{{ $blog_post_tag->id }}" @if(is_array(old('blog_post_tags')) && in_array($blog_post_tag->id, old('blog_post_tags'))) checked @endif
-                                            @if($blogPost->tags->contains($blog_post_tag->id)) checked @endif>
-                                            <label for="blog_post_tag{{ $blog_post_tag->id }}">{{ $blog_post_tag->name }}</label>
+                                            <input type="checkbox" id="{{ $course_tag->id }}" name="course_tags[]" value="{{ $course_tag->id }}" @if(is_array(old('course_tags')) && in_array($course_tag->id, old('course_tags'))) checked @endif
+                                            @if($course->tags->contains($course_tag->id)) checked @endif>
+                                            <label for="course_tag{{ $course_tag->id }}">{{ $course_tag->name }}</label>
                                         </div>
                                         @endforeach
                                     </div>
                                 </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-md-4 col-form-label text-md-end">{{ __('Select Instructors') }}</label>
+                                    <div class="col-md-6">
+                                        @foreach ($course_instructors as $course_inst)
+                                        <div>
+                                            
+                                            <input type="checkbox" id="{{ $course_inst->id }}" name="course_instructors[]" value="{{ $course_inst->id }}" @if(is_array(old('course_instructors')) && in_array($course_inst->id, old('course_instructors'))) checked @endif
+                                            @if($course->instructors->contains($course_inst->id)) checked @endif>
+                                            <label for="course_inst{{ $course_inst->id }}">{{ $course_inst->name }}</label>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+
+                               
+
+
                                 <div class="row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a class="btn btn-primary" href="{{ route('blog_posts.index') }}"> Back</a>
-
+                                        <a class="btn btn-success" href="{{ route('courses.index') }}"> Back</a>
                                     </div>
                                 </div>
+
                             </form>
-
-
-
-
                         </div>
                     </div>
                 </div>
         </section>
+        <!-- /.content -->
     </div>
 </div>
-<!-- Include CKEditor scripts -->
-<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-
-<!-- Initialize CKEditor on the textarea -->
-<script>
-    CKEDITOR.replace('content');
-</script>
 
 @endsection
